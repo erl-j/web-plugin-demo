@@ -33,6 +33,7 @@ const Space = ({}) => {
   React.useEffect(() => {
     if (platform === null) {
       console.log("loading platform");
+      // eslint-disable-next-line no-undef
       platform = loadPlatform();
     }
     console.log("loaded platform");
