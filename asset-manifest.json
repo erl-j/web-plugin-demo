@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/web-plugin-demo/static/css/main.dc48a96d.chunk.css",
+    "main.js": "/web-plugin-demo/static/js/main.ab931902.chunk.js",
+    "main.js.map": "/web-plugin-demo/static/js/main.ab931902.chunk.js.map",
+    "runtime-main.js": "/web-plugin-demo/static/js/runtime-main.d0620166.js",
+    "runtime-main.js.map": "/web-plugin-demo/static/js/runtime-main.d0620166.js.map",
+    "static/js/2.8e5c81b6.chunk.js": "/web-plugin-demo/static/js/2.8e5c81b6.chunk.js",
+    "static/js/2.8e5c81b6.chunk.js.map": "/web-plugin-demo/static/js/2.8e5c81b6.chunk.js.map",
+    "static/js/3.3e3b3b4f.chunk.js": "/web-plugin-demo/static/js/3.3e3b3b4f.chunk.js",
+    "static/js/3.3e3b3b4f.chunk.js.map": "/web-plugin-demo/static/js/3.3e3b3b4f.chunk.js.map",
+    "index.html": "/web-plugin-demo/index.html",
+    "static/css/main.dc48a96d.chunk.css.map": "/web-plugin-demo/static/css/main.dc48a96d.chunk.css.map",
+    "static/js/2.8e5c81b6.chunk.js.LICENSE.txt": "/web-plugin-demo/static/js/2.8e5c81b6.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/web-plugin-demo/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d0620166.js",
+    "static/js/2.8e5c81b6.chunk.js",
+    "static/css/main.dc48a96d.chunk.css",
+    "static/js/main.ab931902.chunk.js"
+  ]
+}
