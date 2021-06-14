@@ -5,11 +5,21 @@ import { CATEGORY_COLORS } from "./Constants";
 import data from "./sample_data.json";
 import { hexToRgb } from "./utils";
 
+const loadPlatform = () => {
+  let obj = {};
+  obj.sendMessage = (message, data) => {
+    console.log(`sending message ${message} with data : ${data}`);
+  };
+  return obj;
+};
+
 const H = 833;
 
 const W = 1200;
 
 let vis = null;
+
+let platform = null;
 
 const Space = ({}) => {
   const ref = React.createRef();
@@ -19,6 +29,21 @@ const Space = ({}) => {
   const [minProbability, setMinProbability] = React.useState(-0.01);
 
   const [maxProbability, setMaxProbability] = React.useState(1.01);
+
+  React.useEffect(() => {
+    if (platform === null) {
+      console.log("loading platform");
+      platform = loadPlatform();
+    }
+    console.log("loaded platform");
+  });
+
+  React.useEffect(() => {
+    if (selectedSampleIndex) {
+      console.log(`playing sample ${data[selectedSampleIndex].path}`);
+      platform.sendMessage("playSample", data[selectedSampleIndex].path);
+    }
+  }, [selectedSampleIndex]);
 
   React.useEffect(() => {
     vis = new D3Component(ref.current, { data, setSelectedSampleIndex });
