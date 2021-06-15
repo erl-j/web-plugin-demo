@@ -5,17 +5,23 @@ import { CATEGORY_COLORS } from "./Constants";
 import data from "./sample_data.json";
 import { hexToRgb } from "./utils";
 
-// const loadPlatform = () => {
-//   let obj = {};
-//   obj.sendMessage = (message, data) => {
-//     console.log(`sending message ${message} with data : ${data}`);
-//   };
-//   return obj;
-// };
+const loadInBrowserPlatform = () => {
+  let obj = {};
+  obj.sendMessage = (message, data) => {
+    console.log(`sending message ${message} with data : ${data}`);
+    let sample_path = data[0];
+    var audio = new Audio(
+      "https://storage.googleapis.com/dimension-studio-data/" +
+        encodeURI(sample_path)
+    );
+    audio.play();
+  };
+  return obj;
+};
 
-const H = 833;
+const H = window.innerHeight;
 
-const W = 1200;
+const W = window.innerWidth;
 
 let vis = null;
 
@@ -33,16 +39,24 @@ const Space = ({}) => {
   React.useEffect(() => {
     if (platform === null) {
       console.log("loading platform");
-      // eslint-disable-next-line no-undef
-      platform = loadPlatform();
+      try {
+        // eslint-disable-next-line no-undef
+        platform = loadPlatform();
+
+        console.log("loaded platform");
+      } catch {
+        console.log("loading platform failed, playing sounds from browser");
+        platform = loadInBrowserPlatform();
+      }
     }
-    console.log("loaded platform");
   });
 
   React.useEffect(() => {
     if (selectedSampleIndex) {
-      console.log(`playing sample ${data[selectedSampleIndex].path}`);
-      platform.sendMessage("playSample", [data[selectedSampleIndex].path]);
+      if (platform !== null) {
+        console.log(`playing sample ${data[selectedSampleIndex].path}`);
+        platform.sendMessage("playSample", [data[selectedSampleIndex].path]);
+      }
     }
   }, [selectedSampleIndex]);
 
@@ -114,7 +128,7 @@ class D3Component {
     .seriesWebglPoint()
     .mainValue((d) => 1 - d.coord_y)
     .crossValue((d) => d.coord_x)
-    .size((d) => 20)
+    .size((d) => 50)
     .decorate((program, points, i) => {
       this.fillColor(program);
     });
@@ -133,7 +147,7 @@ class D3Component {
       selection.enter().call(this.zoom, this.xScale, this.yScale);
       selection.on("click", (event, data) => {
         let cx = this.xScale.invert(event.offsetX);
-        let cy = this.yScale.invert(event.offsetY);
+        let cy = 1 - this.yScale.invert(event.offsetY);
         let closestSampleIndex = data.reduce(
           (prev, c, index) => {
             let new_dist = (cx - c.coord_x) ** 2 + (cy - c.coord_y) ** 2;
