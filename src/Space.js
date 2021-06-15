@@ -5,13 +5,13 @@ import { CATEGORY_COLORS } from "./Constants";
 import data from "./sample_data.json";
 import { hexToRgb } from "./utils";
 
-const loadPlatform = () => {
-  let obj = {};
-  obj.sendMessage = (message, data) => {
-    console.log(`sending message ${message} with data : ${data}`);
-  };
-  return obj;
-};
+// const loadPlatform = () => {
+//   let obj = {};
+//   obj.sendMessage = (message, data) => {
+//     console.log(`sending message ${message} with data : ${data}`);
+//   };
+//   return obj;
+// };
 
 const H = 833;
 
@@ -42,7 +42,7 @@ const Space = ({}) => {
   React.useEffect(() => {
     if (selectedSampleIndex) {
       console.log(`playing sample ${data[selectedSampleIndex].path}`);
-      platform.sendMessage("playSample", data[selectedSampleIndex].path);
+      platform.sendMessage("playSample", [data[selectedSampleIndex].path]);
     }
   }, [selectedSampleIndex]);
 
